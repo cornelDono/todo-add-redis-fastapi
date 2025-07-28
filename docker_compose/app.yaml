@@ -4,6 +4,8 @@ services:
       context: ..
       dockerfile: Dockerfile
     container_name: main-app
+    depends_on:
+      - redis
     ports:
       - "${API_PORT}:8000"
     command: "uvicorn --factory application.api.main:create_app --reload --host 0.0.0.0 --port 8000"
@@ -14,6 +16,25 @@ services:
     networks:
       - backend
 
+  redis:
+    container_name: redis
+    image: "redis:alpine"
+    ports:
+      - "${REDIS_PORT}:6379"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - redis-data:/data
+    env_file:
+      - ../.env
+    networks:
+      - backend
+
 networks:
   backend:
     driver: bridge
+
+volumes:
+  redis-data:
