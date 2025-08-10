@@ -1,15 +1,14 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel
+from aredis_om import HashModel, Field
 
 from utils.static import ToDoStatus
 
 
-class Todo(BaseModel):
-    id: str
+class TodoReddis(HashModel):
     name: str
-    status: ToDoStatus
-    createdAt: datetime
-    updatedAt: datetime
-    deletedAt: Optional[datetime] = None
+    status: ToDoStatus = Field(default=ToDoStatus.ToDo)
+    createdAt: datetime = Field(default=datetime.now())
+    updatedAt: datetime = Field(default=datetime.now())
+    deletedAt: Optional[datetime] = Field(default=None)
