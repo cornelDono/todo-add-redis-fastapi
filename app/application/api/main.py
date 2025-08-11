@@ -2,6 +2,8 @@ from fastapi import FastAPI
 
 from application.api.routes.healthcheck import router as healthcheck_router
 from application.api.routes.todo import router as todo_router
+from application.api.routes.namespace import router as namespace_router
+
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -13,4 +15,5 @@ def create_app() -> FastAPI:
 
     app.include_router(healthcheck_router, prefix='/healthcheck')
     app.include_router(todo_router, prefix='/todo')
+    app.include_router(namespace_router, prefix='/namespace')
     return app

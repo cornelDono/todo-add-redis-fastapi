@@ -2,8 +2,10 @@ from functools import lru_cache
 
 from punq import Container, Scope
 from redis import Redis
+from redis.asyncio import Redis
 
 from settings.config import Config
+
 
 @lru_cache(1)
 def init_container() -> Container:
