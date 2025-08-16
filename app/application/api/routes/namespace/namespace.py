@@ -2,7 +2,7 @@ from redis.asyncio import Redis
 from punq import Container
 from fastapi import APIRouter, status, Depends, HTTPException
 
-from application.api.routes.schemas import CreateNameSpaceRequestSchema, CreateNameSpaceResponseSchema
+from application.api.routes.namespace.schemas import CreateNameSpaceRequestSchema, CreateNameSpaceResponseSchema
 from application.api.schemas import ErrorSchema
 from infra.container import init_container
 from models.exception import ApplicationException
@@ -31,7 +31,7 @@ async def create_namespace(
     title = Title(value=schema.name)
 
     try:
-        namespace = await redis_client.sadd(NameSpace.name, title.value.upper())
+        namespace = await redis_client.sadd(NameSpace.Name, title.value.upper())
     except ApplicationException as exception:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={'error': exception.message})
 

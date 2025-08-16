@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
 from application.api.routes.healthcheck import router as healthcheck_router
-from application.api.routes.todo import router as todo_router
-from application.api.routes.namespace import router as namespace_router
+from application.api.routes.todo.todo import router as todo_router
+from application.api.routes.namespace.namespace import router as namespace_router
 
 
 def create_app() -> FastAPI:
