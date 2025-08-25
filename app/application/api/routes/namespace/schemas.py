@@ -10,3 +10,12 @@ class CreateNameSpaceRequestSchema(BaseModel):
 class CreateNameSpaceResponseSchema(BaseModel):
     name: str
     message: Optional[str] = "Successfully created NameSpace"
+
+
+class DeleteNameSpaceRequestSchema(BaseModel):
+    name: str
+
+
+class DeleteNameSpaceResponseSchema(BaseModel):
+    is_deleted: bool
+    message: Optional[str] = "Successfully deleted NameSpace"
